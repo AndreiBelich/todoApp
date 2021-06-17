@@ -12,7 +12,11 @@ const initial = {
 function AddTask ({ handler }) {
 
   return (
-    <Formik initialValues={initial}>
+    <Formik initialValues={initial} onSubmit={(values, actions) => {
+      console.log("Submit");
+      console.log(values);
+      console.log(actions);
+    }}>
       <Form className={style.addTask}>
         <div className={style.flexRow}>
           <Field
@@ -20,7 +24,7 @@ function AddTask ({ handler }) {
             className={style.formInput}
             placeholder='Enter your task'
           />
-          <Field component={CustomInputComponent} />
+          <Field name="submitButton" component={CustomInputComponent} />
         </div>
       </Form>
     </Formik>
@@ -33,10 +37,8 @@ const CustomInputComponent = ({
   ...props
 }) => (
   <div>
-    {console.log(field)}
-    {console.log(props)}
     {/*<input type="text" {...field} {...props} />*/}
-    <button name="submitButton" type="submit" {...field} {...props}>
+    <button  type="submit" {...field} {...props}>
       <AddIcon/>
     </button>
   </div>
