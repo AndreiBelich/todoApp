@@ -1,8 +1,9 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { v4 as uuid } from "uuid";
 import AddIcon from '@material-ui/icons/Add';
 import useTask from "components/hooks/useTask";
+import { ADD_TASK_SCHEMA } from 'components/shemas/shemas';
 import style from './AddTask.module.sass';
 
 const initial = {
@@ -13,7 +14,7 @@ const initial = {
 function AddTask ({ handler }) {
   //const newTask = useTask();
   return (
-    <Formik initialValues={initial} onSubmit={(values, actions) => {
+    <Formik validationSchema={ADD_TASK_SCHEMA} initialValues={initial} onSubmit={(values, actions) => {
       const { taskField } = values;
       //newTask.changeTitle(taskField);
       const newTask = {
@@ -32,6 +33,7 @@ function AddTask ({ handler }) {
             className={style.formInput}
             placeholder='Enter your task'
           />
+          <ErrorMessage className={style.errorMessage} component="div" name="taskField"/>
           <Field name="submitButton" component={CustomInputComponent} />
         </div>
       </Form>

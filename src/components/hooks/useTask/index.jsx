@@ -1,10 +1,8 @@
-import { KeyboardReturn } from "@material-ui/icons";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { v4 as uuid } from "uuid";
 
-function useTask(n="") {
-  console.log("call hook useTask, newTitle = ", n);
-  const [title, setTitle] = useState(n);
+function useTask() {
+  const [title, setTitle] = useState("");
 
   return {
     id: uuid(),
@@ -12,7 +10,6 @@ function useTask(n="") {
     isFinish: false,
     changeTitle: (newTitle) => setTitle(newTitle)
   };
-  
 }
 
 export default useTask;
