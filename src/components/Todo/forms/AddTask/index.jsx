@@ -34,7 +34,7 @@ function AddTask ({ handler }) {
             placeholder='Enter your task'
           />
           <ErrorMessage className={style.errorMessage} component="div" name="taskField"/>
-          <Field name="submitButton" component={CustomInputComponent} />
+          <Field className={style.addButton} name="submitButton" component={CustomInputComponent} />
         </div>
       </Form>
     </Formik>

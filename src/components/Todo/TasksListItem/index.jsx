@@ -7,10 +7,9 @@ import IconButton from "components/Todo/IconButton";
 import style from "./TasksListItem.module.sass";
 
 function TasksListItem({caption, finishTask, onDelete, isFinish}) {
-
   return (
     <li className={style.tasksListItem}>
-      <span className={isFinish ? style.isFinish : ""}>{caption}</span>
+      <span className={cn({[style.isFinish]: isFinish})}>{caption}</span>
       <div className={style.buttonsWrapper}>
         <IconButton handler={finishTask}>
           {isFinish ? <CheckIcon/> : <CheckBoxOutlineBlankIcon/>}

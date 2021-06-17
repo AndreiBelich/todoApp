@@ -13,12 +13,17 @@ const initialTasks = [
   },
   {
     id: uuid(),
-    title: 'Do something',
+    title: 'Add validation',
     isFinish: false
   },
   {
     id: uuid(),
-    title: 'Drink coffee',
+    title: 'Write styles',
+    isFinish: false
+  },
+  {
+    id: uuid(),
+    title: 'Go to sleep',
     isFinish: false
   }
 ]
