@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { v4 as uuid } from "uuid";
 import TodoHeader from 'components/Todo/TodoHeader'
 import AddTask from 'components/Todo/forms/AddTask'
 import TasksList from './TasksList'
@@ -6,35 +7,56 @@ import style from './Todo.module.sass'
 
 const initialTasks = [
   {
-    id: 1,
-    title: 'Create Todo List'
+    id: uuid(),
+    title: 'Create Todo List',
+    isFinish: false
   },
   {
-    id: 2,
-    title: 'Do something'
+    id: uuid(),
+    title: 'Do something',
+    isFinish: false
   },
   {
-    id: 3,
-    title: 'Drink coffee'
+    id: uuid(),
+    title: 'Drink coffee',
+    isFinish: false
   }
 ]
 
 function Todo () {
-  const [tasks, setTasks] = useState(initialTasks)
+  const [tasks, setTasks] = useState(initialTasks);
 
   const addTask = newTask => {
-    console.log("handler");
-    console.log(newTask)
-    //setTasks((oldTasks) => [...oldTasks, newTask]);
+    setTasks((oldTasks) => [...oldTasks, newTask]);
   }
+
+  const finishTask = (id) => {
+    setTasks((prevTasks) => {
+      const index = prevTasks.findIndex((element) => element.id === id);
+      const oldItem = prevTasks[index];
+      const value = !oldItem.isFinish;
+      const item = {...prevTasks[index], isFinish: value};
+      return [...prevTasks.slice(0, index), item, ...prevTasks.slice(index + 1)];
+    });
+  }
+
+  const deleteItem = (id) => {
+    setTasks((prevTasks) => {
+      const index = prevTasks.findIndex((element) => element.id === id);
+      return [...prevTasks.slice(0, index), ...prevTasks.slice(index + 1)];
+    })
+  }
+
 
   return (
     <article className={style.todo}>
       <TodoHeader caption='Todo APP' />
       <AddTask handler={addTask} />
-      <TasksList tasks={tasks} />
+      <TasksList finishTask={finishTask} 
+                 tasks={tasks}
+                 onDelete={deleteItem} />
     </article>
   )
 }
 
-export default Todo
+export default Todo;

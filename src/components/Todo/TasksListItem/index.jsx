@@ -1,19 +1,21 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
+import cn from "classnames";
 import CheckIcon from '@material-ui/icons/Check';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import IconButton from "components/Todo/IconButton";
 import style from "./TasksListItem.module.sass";
 
-function TasksListItem({caption}) {
+function TasksListItem({caption, finishTask, onDelete, isFinish}) {
+
   return (
     <li className={style.tasksListItem}>
-      <span>{caption}</span>
+      <span className={isFinish ? style.isFinish : ""}>{caption}</span>
       <div className={style.buttonsWrapper}>
-        <IconButton>
-          <CheckBoxOutlineBlankIcon/>
+        <IconButton handler={finishTask}>
+          {isFinish ? <CheckIcon/> : <CheckBoxOutlineBlankIcon/>}
         </IconButton>
-        <IconButton>
+        <IconButton handler={onDelete}>
           <DeleteIcon/>
         </IconButton>
       </div>

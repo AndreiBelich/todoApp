@@ -1,8 +1,9 @@
-import React from 'react'
-import { Formik, Form, Field } from 'formik'
-import AddIcon from '@material-ui/icons/Add'
-import IconButton from 'components/Todo/IconButton'
-import style from './AddTask.module.sass'
+import React from 'react';
+import { Formik, Form, Field } from 'formik';
+import { v4 as uuid } from "uuid";
+import AddIcon from '@material-ui/icons/Add';
+import useTask from "components/hooks/useTask";
+import style from './AddTask.module.sass';
 
 const initial = {
   taskField: "",
@@ -10,12 +11,19 @@ const initial = {
 };
 
 function AddTask ({ handler }) {
-
+  //const newTask = useTask();
   return (
     <Formik initialValues={initial} onSubmit={(values, actions) => {
-      console.log("Submit");
-      console.log(values);
-      console.log(actions);
+      const { taskField } = values;
+      //newTask.changeTitle(taskField);
+      const newTask = {
+        id: uuid(),
+        isFinish: false,
+        title: taskField
+      };
+      handler(newTask);
+      actions.setSubmitting(false);
+      actions.resetForm(initial);
     }}>
       <Form className={style.addTask}>
         <div className={style.flexRow}>
@@ -32,8 +40,8 @@ function AddTask ({ handler }) {
 }
 
 const CustomInputComponent = ({
-  field, // { name, value, onChange, onBlur }
-  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  field,
+  form,
   ...props
 }) => (
   <div>

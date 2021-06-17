@@ -1,10 +1,15 @@
 import React from 'react'
 import TasksListItem from "components/Todo/TasksListItem";
 
-function TasksList({tasks}) {
+function TasksList({tasks, finishTask, onDelete}) {
   return (
     <ul>
-      {tasks.map(({id, title}) => <TasksListItem key={id} caption={title}/>)}
+      {tasks.map(({id, title, isFinish}) => 
+        <TasksListItem finishTask={() => finishTask(id)}
+                       onDelete={() => onDelete(id)}
+                       key={id} 
+                       caption={title}
+                       isFinish={isFinish}/>)}
     </ul>
   )
 }
