@@ -1,9 +1,10 @@
 import React from 'react'
+import cn from "classnames";
 import style from "./IconButton.module.sass";
 
- function IconButton({handler, children}) {
+ function IconButton({handler,className, children}) {
   return (
-    <button className={style.iconButton} onClick={handler}>{children}</button>
+    <button className={cn(className, style.iconButton)} onClick={handler}>{children}</button>
   )
 }
 

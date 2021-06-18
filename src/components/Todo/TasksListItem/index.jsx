@@ -14,7 +14,7 @@ function TasksListItem({caption, finishTask, onDelete, isFinish}) {
         <IconButton handler={finishTask}>
           {isFinish ? <CheckIcon/> : <CheckBoxOutlineBlankIcon/>}
         </IconButton>
-        <IconButton handler={onDelete}>
+        <IconButton className={style.deleteStyles} handler={onDelete}>
           <DeleteIcon/>
         </IconButton>
       </div>
